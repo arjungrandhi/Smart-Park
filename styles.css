@@ -177,3 +177,72 @@ section {
   font-size: 1.2em;
   margin: 8px 0;
 }
+
+/* City page */
+.city-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  width: 400px;
+  margin: auto;
+}
+
+.city-container h2 {
+  color: #f49b42;
+  margin-bottom: 20px;
+}
+
+.city-container select,
+.city-container button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+.city-container button {
+  background-color: #f49b42;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.city-container button:hover {
+  background-color: #e58928;
+}
+
+.parking-list {
+  text-align: left;
+  margin-top: 25px;
+}
+
+.parking-item {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.parking-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.parking-item h3 {
+  margin: 0;
+  color: #f49b42;
+}
+
+.parking-item p {
+  margin: 5px 0 0;
+  font-size: 0.9em;
+  color: #555;
+}

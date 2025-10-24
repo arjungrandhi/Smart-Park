@@ -5,67 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Park - Select City</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    body {
-      background: url('main.jpeg') no-repeat center center/cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      color: #333;
-    }
-
-    .city-container {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 40px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      width: 400px;
-    }
-
-    h2 {
-      color: #f49b42;
-      margin-bottom: 20px;
-    }
-
-    select {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
-      font-size: 1em;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #f49b42;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #e58928;
-    }
-
-    a {
-      display: block;
-      margin-top: 20px;
-      color: #555;
-      text-decoration: none;
-      font-size: 0.9em;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
 </head>
 <body>
   <div class="city-container">
@@ -77,7 +16,7 @@
       <option>Chennai</option>
       <option>Delhi</option>
       <option>Ernakulam</option>
-      <option>fairdabad</option>
+      <option>Faridabad</option>
       <option>Goa</option>
       <option>Hyderabad</option>
       <option>Indore</option>
@@ -92,20 +31,64 @@
       <option>Ranchi</option>
       <option>Surat</option>
       <option>Tirupati</option>
-    <option>Vijayawada</option>
-    <option>Vishakapatanam</option>
+      <option>Vijayawada</option>
+      <option>Visakhapatnam</option>
     </select>
     <button id="submitBtn">Submit</button>
     <a href="signup.html">← Back</a>
+
+    <div id="parkingSpots" class="parking-list"></div>
   </div>
 
   <script>
+    const parkingData = {
+      "Mumbai": [
+        { name: "Bandra Kurla Complex Parking", area: "BKC" },
+        { name: "Phoenix Mills Parking", area: "Lower Parel" },
+        { name: "Gateway of India Parking", area: "Colaba" },
+        { name: "Juhu Beach Parking", area: "Juhu" }
+      ],
+      "Goa": [
+        { name: "Calangute Beach Parking", area: "North Goa" },
+        { name: "Baga Beach Parking", area: "Baga" },
+        { name: "Miramar Beach Parking", area: "Panaji" }
+      ],
+      "Chennai": [
+        { name: "Express Avenue Parking", area: "Royapettah" },
+        { name: "Marina Beach Parking", area: "Marina" },
+        { name: "Phoenix MarketCity Parking", area: "Velachery" }
+      ],
+      "Hyderabad": [
+        { name: "Inorbit Mall Parking", area: "Hitech City" },
+        { name: "GVK One Parking", area: "Banjara Hills" },
+        { name: "Lumbini Park Parking", area: "Tank Bund" }
+      ]
+    };
+
     document.getElementById("submitBtn").addEventListener("click", function() {
       const city = document.getElementById("citySelect").value;
+      const parkingSpotsDiv = document.getElementById("parkingSpots");
+
       if (!city) {
         alert("Please select a city first!");
+        return;
+      }
+
+      parkingSpotsDiv.innerHTML = "";
+
+      if (parkingData[city]) {
+        parkingData[city].forEach(spot => {
+          const div = document.createElement("div");
+          div.className = "parking-item";
+          div.innerHTML = `<h3>${spot.name}</h3><p>${spot.area}</p>`;
+          div.addEventListener("click", () => {
+            const query = encodeURIComponent(`${spot.name}, ${city}`);
+            window.open(`https://www.google.com/maps/search/${query}+parking`, "_blank");
+          });
+          parkingSpotsDiv.appendChild(div);
+        });
       } else {
-        alert(`You selected: ${city}\n(Next step: Navigate to Google Maps showing parking in ${city})`);
+        parkingSpotsDiv.innerHTML = `<p>No popular spots added yet for ${city}.</p>`;
       }
     });
   </script>
