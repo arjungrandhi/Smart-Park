@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Park - Select City</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background-color: #fff3e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .city-container {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      width: 400px;
+    }
+
+    h2 {
+      color: #f49b42;
+      margin-bottom: 20px;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      font-size: 1em;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #f49b42;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e58928;
+    }
+
+    a {
+      display: block;
+      margin-top: 20px;
+      color: #555;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="city-container">
+    <h2>Select Your City</h2>
+    <select id="citySelect">
+      <option value="" disabled selected>Select City</option>
+      <option>Ahmedabad</option>
+      <option>Bangalore</option>
+      <option>Chennai</option>
+      <option>Delhi</option>
+      <option>Hyderabad</option>
+      <option>Mumbai</option>
+      <option>Pune</option>
+      <option>Kolkata</option>
+      <option>Jaipur</option>
+      <option>Lucknow</option>
+    </select>
+    <button id="submitBtn">Submit</button>
+    <a href="signup.html">← Back</a>
+  </div>
+
+  <script>
+    document.getElementById("submitBtn").addEventListener("click", function() {
+      const city = document.getElementById("citySelect").value;
+      if (!city) {
+        alert("Please select a city first!");
+      } else {
+        alert(`You selected: ${city}\n(Next step: Navigate to Google Maps showing parking in ${city})`);
+      }
+    });
+  </script>
+</body>
+</html>
