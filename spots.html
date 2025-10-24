@@ -8,123 +8,124 @@
   <style>
     body {
       background: url('main.jpeg') no-repeat center center/cover;
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      justify-content: flex-start;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      flex-direction: column;
       padding: 30px;
-    }
-
-    h2 {
-      color: #f49b42;
-      margin-bottom: 30px;
-      text-align: center;
     }
 
     .spots-container {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       max-width: 600px;
       width: 100%;
+      text-align: center;
     }
 
-    .parking-item {
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .parking-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-
-    .parking-item h3 {
+    h2 {
       color: #f49b42;
-      margin: 0;
+      margin-bottom: 25px;
     }
 
-    .parking-item p {
-      margin: 5px 0 0;
-      color: #555;
+    .spots-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .spot {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .spot:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    button, a {
+      padding: 10px 20px;
+      background-color: #f49b42;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    button:hover, a:hover {
+      background-color: #e58928;
     }
 
     a {
-      display: block;
-      margin-top: 20px;
-      text-align: center;
-      color: #333;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
+      display: inline-block;
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
-  <h2 id="cityTitle">Parking Spots in Your City</h2>
-
-  <div class="spots-container" id="spotsList"></div>
-
-  <a href="city.html">← Back to City Selection</a>
+  <div class="spots-container">
+    <h2 id="cityTitle">Popular Parking Spots</h2>
+    <div class="spots-list" id="spotsList"></div>
+    <a href="city.html">← Back to City Selection</a>
+  </div>
 
   <script>
-    const parkingData = {
-      "Mumbai": [
-        { name: "Bandra Kurla Complex Parking", area: "BKC" },
-        { name: "Phoenix Mills Parking", area: "Lower Parel" },
-        { name: "Gateway of India Parking", area: "Colaba" }
-      ],
-      "Goa": [
-        { name: "Calangute Beach Parking", area: "North Goa" },
-        { name: "Baga Beach Parking", area: "Baga" },
-        { name: "Miramar Beach Parking", area: "Panaji" }
-      ],
-      "Chennai": [
-        { name: "Express Avenue Parking", area: "Royapettah" },
-        { name: "Marina Beach Parking", area: "Marina" },
-        { name: "Phoenix MarketCity Parking", area: "Velachery" }
-      ],
-      "Hyderabad": [
-        { name: "Inorbit Mall Parking", area: "Hitech City" },
-        { name: "GVK One Parking", area: "Banjara Hills" },
-        { name: "Lumbini Park Parking", area: "Tank Bund" }
-      ]
+    const citySpots = {
+      "Ahmedabad": ["Manek Chowk","Law Garden","CG Road","Alpha One Mall","Kankaria Lake","Science City","Sabarmati Riverfront","ISCON Mall"],
+      "Bangalore": ["MG Road","Brigade Road","Koramangala","Whitefield","Indiranagar","Majestic","Forum Mall","Orion Mall"],
+      "Chennai": ["Marina Beach","T Nagar","Velachery","Anna Nagar","Phoenix Market City","Besant Nagar","Express Avenue","Spencer Plaza"],
+      "Delhi": ["Connaught Place","India Gate","Hauz Khas","Karol Bagh","Lajpat Nagar","Rajouri Garden","Saket Select Citywalk","Janpath Market"],
+      "Ernakulam": ["Marine Drive","Broadway Market","Lulu Mall","Vyttila","Kaloor","Palarivattom","High Court Junction","Edappally"],
+      "Faridabad": ["NIT Market","Sector 15 Market","Crown Plaza Mall","Badkhal Lake","Town Park","Old Faridabad","Bata Chowk","Surajkund"],
+      "Goa": ["Baga Beach","Calangute Beach","Anjuna Beach","Candolim","Panaji City Center","Mapusa Market","Colva Beach","Margao"],
+      "Hyderabad": ["Charminar","Banjara Hills","Hitech City","Gachibowli","Kukatpally","Begumpet","Inorbit Mall","Necklace Road"],
+      "Indore": ["Rajwada","Sarafa Bazaar","Vijay Nagar","Treasure Island Mall","Palasia","56 Dukan","Khajrana Temple","MG Road"],
+      "Jaipur": ["Hawa Mahal","Bapu Bazaar","Johri Bazaar","MI Road","Tonk Road","City Palace","Amber Fort","World Trade Park"],
+      "Kochi": ["Lulu Mall","Marine Drive","Fort Kochi","Vyttila","Edappally","Palarivattom","Kaloor","Panampilly Nagar"],
+      "Kolkata": ["Park Street","Howrah Bridge","New Market","Salt Lake","South City Mall","Eco Park","Esplanade","Victoria Memorial"],
+      "Lucknow": ["Hazratganj","Gomti Nagar","Aminabad","Alambagh","Phoenix Palassio Mall","Charbagh","Indira Nagar","Janpath Market"],
+      "Mumbai": ["Gateway of India","Marine Drive","Bandra","Andheri","Powai","Colaba Causeway","Phoenix Mall Lower Parel","Juhu Beach"],
+      "Nagpur": ["Sitabuldi","Futala Lake","Sadar Bazar","MIHAN","Dharampeth","Ambazari Lake","Civil Lines","Wardha Road"],
+      "Ooty": ["Ooty Lake","Botanical Garden","Doddabetta Peak","Charing Cross","Rose Garden","Stone House Area","Commercial Road","Boat House Road"],
+      "Pune": ["Koregaon Park","JM Road","FC Road","Viman Nagar","Camp","Magarpatta","Hinjewadi","Phoenix Market City"],
+      "Ranchi": ["Main Road","Lalpur Chowk","Kanke Road","Harmu","Doranda","Ratu Road","Birsa Chowk","Hindpiri"],
+      "Surat": ["Ghod Dod Road","Adajan","Vesu","Athwa Gate","VR Mall","Sarthana Nature Park","Dumas Beach","Varachha"],
+      "Tirupathi": ["Alipiri Road","Tirumala Temple","Railway Station Area","Leela Mahal Circle","Tata Nagar","Renigunta Road","RC Road","Kapila Theertham"],
+      "Vishakapatanam": ["RK Beach","MVP Colony","Dwaraka Nagar","Gajuwaka","CBM Compound","Rushikonda","Jagadamba Junction","Cinehub Maddilapalem"],
+      "Vijayawada": ["Benz Circle","PVP Mall","Governorpet","One Town","Durga Temple","Auto Nagar","MG Road","Raghavaiah Park"]
     };
 
     const city = localStorage.getItem("selectedCity");
-    const cityTitle = document.getElementById("cityTitle");
     const spotsList = document.getElementById("spotsList");
+    const cityTitle = document.getElementById("cityTitle");
 
-    if (!city) {
-      cityTitle.textContent = "No city selected!";
-      spotsList.innerHTML = `<p>Please go back and select a city.</p>`;
-    } else {
+    if (city && citySpots[city]) {
       cityTitle.textContent = `Popular Parking Spots in ${city}`;
-
-      if (parkingData[city]) {
-        parkingData[city].forEach(spot => {
-          const div = document.createElement("div");
-          div.className = "parking-item";
-          div.innerHTML = `<h3>${spot.name}</h3><p>${spot.area}</p>`;
-          div.addEventListener("click", () => {
-            const query = encodeURIComponent(`${spot.name}, ${city}`);
-            window.open(`https://www.google.com/maps/search/${query}+parking`, "_blank");
-          });
-          spotsList.appendChild(div);
+      citySpots[city].forEach(spot => {
+        const div = document.createElement("div");
+        div.classList.add("spot");
+        div.textContent = spot;
+        div.addEventListener("click", () => {
+          window.open(`https://www.google.com/maps/search/Parking+near+${encodeURIComponent(spot + " " + city)}`, "_blank");
         });
-      } else {
-        spotsList.innerHTML = `<p>No parking data available for ${city}.</p>`;
-      }
+        spotsList.appendChild(div);
+      });
+    } else {
+      cityTitle.textContent = "No city selected!";
     }
   </script>
 </body>
