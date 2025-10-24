@@ -5,90 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Park - Select City</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: url('main.jpeg') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .city-container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      width: 400px;
+    }
+
+    h2 {
+      color: #f49b42;
+      margin-bottom: 20px;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #f49b42;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e58928;
+    }
+
+    a {
+      color: #555;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <div class="city-container">
     <h2>Select Your City</h2>
     <select id="citySelect">
       <option value="" disabled selected>Select City</option>
-      <option>Ahmedabad</option>
-      <option>Bangalore</option>
-      <option>Chennai</option>
-      <option>Delhi</option>
-      <option>Ernakulam</option>
-      <option>Faridabad</option>
-      <option>Goa</option>
-      <option>Hyderabad</option>
-      <option>Indore</option>
-      <option>Jaipur</option>
-      <option>Kochi</option>
-      <option>Kolkata</option>
-      <option>Lucknow</option>
       <option>Mumbai</option>
-      <option>Nagpur</option>
-      <option>Ooty</option> 
+      <option>Goa</option>
+      <option>Chennai</option>
+      <option>Hyderabad</option>
+      <option>Delhi</option>
+      <option>Bangalore</option>
       <option>Pune</option>
-      <option>Ranchi</option>
-      <option>Surat</option>
-      <option>Tirupati</option>
-      <option>Vijayawada</option>
-      <option>Visakhapatnam</option>
+      <option>Kolkata</option>
     </select>
     <button id="submitBtn">Submit</button>
     <a href="signup.html">← Back</a>
-
-    <div id="parkingSpots" class="parking-list"></div>
   </div>
 
   <script>
-    const parkingData = {
-      "Mumbai": [
-        { name: "Bandra Kurla Complex Parking", area: "BKC" },
-        { name: "Phoenix Mills Parking", area: "Lower Parel" },
-        { name: "Gateway of India Parking", area: "Colaba" },
-        { name: "Juhu Beach Parking", area: "Juhu" }
-      ],
-      "Goa": [
-        { name: "Calangute Beach Parking", area: "North Goa" },
-        { name: "Baga Beach Parking", area: "Baga" },
-        { name: "Miramar Beach Parking", area: "Panaji" }
-      ],
-      "Chennai": [
-        { name: "Express Avenue Parking", area: "Royapettah" },
-        { name: "Marina Beach Parking", area: "Marina" },
-        { name: "Phoenix MarketCity Parking", area: "Velachery" }
-      ],
-      "Hyderabad": [
-        { name: "Inorbit Mall Parking", area: "Hitech City" },
-        { name: "GVK One Parking", area: "Banjara Hills" },
-        { name: "Lumbini Park Parking", area: "Tank Bund" }
-      ]
-    };
-
     document.getElementById("submitBtn").addEventListener("click", function() {
       const city = document.getElementById("citySelect").value;
-      const parkingSpotsDiv = document.getElementById("parkingSpots");
-
       if (!city) {
         alert("Please select a city first!");
-        return;
-      }
-
-      parkingSpotsDiv.innerHTML = "";
-
-      if (parkingData[city]) {
-        parkingData[city].forEach(spot => {
-          const div = document.createElement("div");
-          div.className = "parking-item";
-          div.innerHTML = `<h3>${spot.name}</h3><p>${spot.area}</p>`;
-          div.addEventListener("click", () => {
-            const query = encodeURIComponent(`${spot.name}, ${city}`);
-            window.open(`https://www.google.com/maps/search/${query}+parking`, "_blank");
-          });
-          parkingSpotsDiv.appendChild(div);
-        });
       } else {
-        parkingSpotsDiv.innerHTML = `<p>No popular spots added yet for ${city}.</p>`;
+        // Save selected city to localStorage so next page can access it
+        localStorage.setItem("selectedCity", city);
+        window.location.href = "spots.html";
       }
     });
   </script>

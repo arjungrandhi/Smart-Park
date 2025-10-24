@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Park - Parking Spots</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: url('main.jpeg') no-repeat center center/cover;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 30px;
+    }
+
+    h2 {
+      color: #f49b42;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .spots-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .parking-item {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .parking-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .parking-item h3 {
+      color: #f49b42;
+      margin: 0;
+    }
+
+    .parking-item p {
+      margin: 5px 0 0;
+      color: #555;
+    }
+
+    a {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: #333;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="cityTitle">Parking Spots in Your City</h2>
+
+  <div class="spots-container" id="spotsList"></div>
+
+  <a href="city.html">← Back to City Selection</a>
+
+  <script>
+    const parkingData = {
+      "Mumbai": [
+        { name: "Bandra Kurla Complex Parking", area: "BKC" },
+        { name: "Phoenix Mills Parking", area: "Lower Parel" },
+        { name: "Gateway of India Parking", area: "Colaba" }
+      ],
+      "Goa": [
+        { name: "Calangute Beach Parking", area: "North Goa" },
+        { name: "Baga Beach Parking", area: "Baga" },
+        { name: "Miramar Beach Parking", area: "Panaji" }
+      ],
+      "Chennai": [
+        { name: "Express Avenue Parking", area: "Royapettah" },
+        { name: "Marina Beach Parking", area: "Marina" },
+        { name: "Phoenix MarketCity Parking", area: "Velachery" }
+      ],
+      "Hyderabad": [
+        { name: "Inorbit Mall Parking", area: "Hitech City" },
+        { name: "GVK One Parking", area: "Banjara Hills" },
+        { name: "Lumbini Park Parking", area: "Tank Bund" }
+      ]
+    };
+
+    const city = localStorage.getItem("selectedCity");
+    const cityTitle = document.getElementById("cityTitle");
+    const spotsList = document.getElementById("spotsList");
+
+    if (!city) {
+      cityTitle.textContent = "No city selected!";
+      spotsList.innerHTML = `<p>Please go back and select a city.</p>`;
+    } else {
+      cityTitle.textContent = `Popular Parking Spots in ${city}`;
+
+      if (parkingData[city]) {
+        parkingData[city].forEach(spot => {
+          const div = document.createElement("div");
+          div.className = "parking-item";
+          div.innerHTML = `<h3>${spot.name}</h3><p>${spot.area}</p>`;
+          div.addEventListener("click", () => {
+            const query = encodeURIComponent(`${spot.name}, ${city}`);
+            window.open(`https://www.google.com/maps/search/${query}+parking`, "_blank");
+          });
+          spotsList.appendChild(div);
+        });
+      } else {
+        spotsList.innerHTML = `<p>No parking data available for ${city}.</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
