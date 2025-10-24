@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Park</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    header {
+      background-color: #f49b42;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+    }
+
+    header h1 {
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      background: url('main.jpeg') no-repeat center center/cover;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #f49b42;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 3em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .hero p {
+      font-size: 1.5em;
+      margin-bottom: 30px;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .hero button {
+      padding: 12px 25px;
+      background-color: #f49b42;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .hero button:hover {
+      background-color: #e58928;
+    }
+
+    .reviews {
+      background-color: #fff3e0;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .reviews h3 {
+      color: #f49b42;
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    .review-box {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .review {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    footer p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Smart Park</h1>
+    <nav>
+      <a href="#">Sign In</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Book Your Spot!</h2>
+    <p>Just one step away from availing the best parking facility.</p>
+    <button>Sign Up</button>
+  </section>
+
+  <section class="reviews">
+    <h3>Customer Reviews</h3>
+    <div class="review-box">
+      <div class="review">
+        <p>"Smart Park made my daily commute so easy!"</p>
+        <p>- Ramesh K.</p>
+      </div>
+      <div class="review">
+        <p>"Finding parking was never this simple. Highly recommend!"</p>
+        <p>- Priya D.</p>
+      </div>
+      <div class="review">
+        <p>"Superb service and great convenience!"</p>
+        <p>- Arjun G.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>📍 Address: Smart Park HQ, Chennai</p>
+    <p>📞 Contact: +91 98765 43210 | ✉️ smartpark@email.com</p>
+  </footer>
+</body>
+</html>
